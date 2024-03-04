@@ -46,7 +46,7 @@ var pzb_speed_limit: float setget set_speed_limit  # no speed limit
 
 var pzb_command_pressed: bool = false
 
-onready var player: LTSPlayer = find_parent("Player")
+onready var player: LTSPlayer = $"../.."
 
 
 func _ready() -> void:
@@ -65,7 +65,7 @@ func _on_settings_changed() -> void:
 	#   connect "settings changed" signal, then re-check if pzb is on
 	#   in case the player toggles it in the pause-menu options menu
 
-	var is_pzb_enabled: bool = (not Root.EasyMode) and jSettings.get_pzb()
+	var is_pzb_enabled: bool = (not Root.EasyMode) and jSettings.get_pzb() and not player.ai
 
 	if is_pzb_enabled:
 		pzb_reset()

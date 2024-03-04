@@ -7,7 +7,7 @@ var was_sifa_reset: bool = false
 # this is a signal, so different trains can implement it differently
 signal sifa_visual_hint(is_turned_on)
 
-onready var player: LTSPlayer = find_parent("Player")
+onready var player: LTSPlayer = $"../.."
 
 
 func _ready() -> void:
@@ -19,7 +19,7 @@ func _on_settings_changed() -> void:
 	#   connect "settings changed" signal, then re-check if sifa is on
 	#   in case the player toggles it in the pause-menu options menu
 
-	is_sifa_enabled = (not Root.EasyMode) and jSettings.get_sifa()
+	is_sifa_enabled = (not Root.EasyMode) and jSettings.get_sifa() and not player.ai
 	set_process(is_sifa_enabled)
 	set_process_unhandled_input(is_sifa_enabled)
 
